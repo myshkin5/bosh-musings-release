@@ -1,0 +1,5 @@
+check process web
+  with pidfile /var/vcap/sys/run/web/pid
+  start program "/var/vcap/jobs/web/bin/web_ctl start"
+  stop program "/var/vcap/jobs/web/bin/web_ctl stop"
+  group vcap

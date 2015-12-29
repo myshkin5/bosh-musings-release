@@ -1,0 +1,6 @@
+---
+blobstore:
+  provider: local
+  options:
+    blobstore_path: /tmp/bosh-musings-blobs
+final_name: bosh_musings_blobstore

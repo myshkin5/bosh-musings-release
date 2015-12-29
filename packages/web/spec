@@ -1,0 +1,8 @@
+---
+name: web
+
+dependencies:
+- go
+
+files:
+- bosh-musings/**/*.go

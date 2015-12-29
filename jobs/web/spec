@@ -1,0 +1,14 @@
+---
+name: web
+
+templates:
+  web_ctl.erb: bin/web_ctl
+  pid_utils.sh: bin/pid_utils.sh
+
+packages:
+- web
+
+properties:
+  web.listen_port:
+    description: "TCP port on which the web server should listen."
+    default: 8080

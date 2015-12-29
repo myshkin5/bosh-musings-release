@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -e -u -x
+
+RUN_DIR=/var/vcap/sys/run/web
+LOG_DIR=/var/vcap/sys/log/web
+PACKAGE_DIR=/var/vcap/packages/web
+export PIDFILE=$RUN_DIR/pid
+
+source $(dirname $0)/pid_utils.sh
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+    pid_guard $PIDFILE "web"
+
+    export PORT=<%= p("web.listen_port") %>
+
+    exec chpst -u vcap:vcap $PACKAGE_DIR/web \
+      &>> $LOG_DIR/web.log
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+
+    ;;
+
+esac
