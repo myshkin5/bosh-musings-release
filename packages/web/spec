@@ -5,4 +5,6 @@ dependencies:
 - go
 
 files:
-- bosh-musings/**/*.go
+- bosh-musings/web/*.go
+- bosh-musings/utils/*.go # Auto-generated dependency
+- bosh-musings/web/handler/*.go # Auto-generated dependency

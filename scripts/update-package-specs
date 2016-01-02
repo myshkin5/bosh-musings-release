@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+RELEASE_DIR=$(dirname $0)/..
+
+function update-package-spec() {
+    PACKAGE=$1
+    EXECUTABLE=$2
+    grep -v "Auto-generated dependency" packages/$PACKAGE/spec > packages/$PACKAGE/spec.new
+    go list -f "{{ range .Deps }}- {{.}}/*.go # Auto-generated dependency
+{{ end }}" $EXECUTABLE \
+        | grep -e "\- github.com" -e "\- bosh-musings" >> $RELEASE_DIR/packages/$PACKAGE/spec.new
+    mv $RELEASE_DIR/packages/$PACKAGE/spec.new $RELEASE_DIR/packages/$PACKAGE/spec
+}
+
+update-package-spec web bosh-musings/web

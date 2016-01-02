@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+RELEASE_DIR=$(dirname $0)/..
+
+$RELEASE_DIR/scripts/update-package-specs
+
+# Will fail if the previous command changed a spec (or if the working directory is dirty)
+# unless the --force option is passed to this script (which passes it on to the bosh CLI)
+bosh create release $@
