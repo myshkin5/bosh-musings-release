@@ -1,25 +1,20 @@
 ---
+meta: (( merge ))
+
 name: bosh-musings
-director_uuid: de7e613b-0f3a-47f8-8e94-cbd81af62746
+director_uuid: PLACEHOLDER-DIRECTOR-UUID
 
 releases:
 - {name: bosh_musings, version: latest}
 
 networks:
 - name: default
-  subnets:
-  - cloud_properties: {}
-    range: 10.244.10.0/24
-    gateway: 10.244.10.1
-    static:
-    - 10.244.10.2 - 10.244.10.200
+  subnets: (( merge ))
 
 resource_pools:
 - name: default
   network: default
-  stemcell:
-    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
-    version: latest
+  stemcell: (( meta.stemcell ))
 
 compilation:
   workers: 2
@@ -29,16 +24,15 @@ compilation:
 update:
   canaries: 1
   max_in_flight: 2
-  canary_watch_time: 15000-30000
+  canary_watch_time: 15000-100000
   update_watch_time: 15000-300000
 
 jobs:
 - name: web
-  instances: 1
+  instances: (( merge ))
   templates:
   - {name: web, release: bosh_musings}
   resource_pool: default
   networks:
   - name: default
-    static_ips:
-    - 10.244.10.10
+    static_ips: (( merge ))

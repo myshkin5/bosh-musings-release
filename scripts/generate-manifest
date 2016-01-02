@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -e
+
+RELEASE_DIR=$(dirname $0)/..
+TMP_DIR=$RELEASE_DIR/tmp
+
+mkdir -p $TMP_DIR
+
+spiff merge $RELEASE_DIR/templates/bosh-musings-template.yml $RELEASE_DIR/templates/bosh-lite-stub.yml > $TMP_DIR/manifest.yml
+
+if [[ -z $DIRECTOR_UUID ]]; then
+    DIRECTOR_UUID=$(bosh status --uuid)
+fi
+
+sed -i '' -e "s/PLACEHOLDER-DIRECTOR-UUID/$DIRECTOR_UUID/g" $TMP_DIR/manifest.yml
+
+bosh deployment $TMP_DIR/manifest.yml

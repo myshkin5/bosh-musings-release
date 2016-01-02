@@ -19,3 +19,4 @@
 /pkg
 *.coverprofile
 /src/golang.org/
+/tmp
