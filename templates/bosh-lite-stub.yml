@@ -5,17 +5,41 @@ meta:
     version: latest
 
 networks:
-- name: default
+- name: bosh_musings_z1
   subnets:
   - cloud_properties: {}
     range: 10.244.10.0/24
     gateway: 10.244.10.1
     static:
     - 10.244.10.2 - 10.244.10.200
+- name: bosh_musings_z2
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.11.0/24
+    gateway: 10.244.11.1
+    static:
+    - 10.244.11.2 - 10.244.11.200
+- name: bosh_musings_z3
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.12.0/24
+    gateway: 10.244.12.1
+    static:
+    - 10.244.12.2 - 10.244.12.200
 
 jobs:
-- name: web
+- name: web_z1
   instances: 1
   networks:
-  - name: default
-    static_ips:  (( static_ips(1) ))
+  - name: bosh_musings_z1
+    static_ips: (( static_ips(0) ))
+- name: web_z2
+  instances: 0
+  networks:
+  - name: bosh_musings_z2
+    static_ips: []
+- name: web_z3
+  instances: 0
+  networks:
+  - name: bosh_musings_z3
+    static_ips: []
