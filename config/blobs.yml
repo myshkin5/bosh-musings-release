@@ -1,1 +1,5 @@
---- {}
+---
+go/go1.5.2.linux-amd64.tar.gz:
+  object_id: 79ee7175-0de3-494a-986e-e3c738e74a6a
+  sha: cae87ed095e8d94a81871281d35da7829bd1234e
+  size: 76350075

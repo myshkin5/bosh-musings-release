@@ -1,6 +1,5 @@
 ---
 blobstore:
-  provider: local
+  provider: s3
   options:
-    blobstore_path: /tmp/bosh-musings-blobs
-final_name: bosh_musings_blobstore
+    bucket_name: bosh-musings-blobs
