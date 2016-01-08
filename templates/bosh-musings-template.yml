@@ -1,6 +1,4 @@
 ---
-meta: (( merge ))
-
 name: bosh-musings
 director_uuid: PLACEHOLDER-DIRECTOR-UUID
 
@@ -18,13 +16,13 @@ networks:
 resource_pools:
 - name: default_z1
   network: bosh_musings_z1
-  stemcell: (( meta.stemcell ))
+  stemcell: (( grab meta.stemcell ))
 - name: default_z2
   network: bosh_musings_z2
-  stemcell: (( meta.stemcell ))
+  stemcell: (( grab meta.stemcell ))
 - name: default_z3
   network: bosh_musings_z3
-  stemcell: (( meta.stemcell ))
+  stemcell: (( grab meta.stemcell ))
 
 compilation:
   workers: 2
