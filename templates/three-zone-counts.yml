@@ -1,0 +1,17 @@
+---
+jobs:
+- name: web_z1
+  instances: 2
+  networks:
+  - name: bosh_musings_z1
+    static_ips: (( static_ips(0, 1) ))
+- name: web_z2
+  instances: 2
+  networks:
+  - name: bosh_musings_z2
+    static_ips: (( static_ips(0, 1) ))
+- name: web_z3
+  instances: 2
+  networks:
+  - name: bosh_musings_z3
+    static_ips: (( static_ips(0, 1) ))

@@ -7,10 +7,7 @@ TMP_DIR=$RELEASE_DIR/tmp
 
 mkdir -p $TMP_DIR
 
-spruce merge --prune meta \
-    $RELEASE_DIR/templates/bosh-musings-template.yml \
-    $RELEASE_DIR/templates/bosh-lite-stub.yml \
-    > $TMP_DIR/manifest.yml
+spruce merge --prune meta $RELEASE_DIR/templates/bosh-musings-template.yml $@ > $TMP_DIR/manifest.yml
 
 if [[ -z $DIRECTOR_UUID ]]; then
     DIRECTOR_UUID=$(bosh status --uuid)

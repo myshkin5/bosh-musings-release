@@ -1,0 +1,32 @@
+---
+networks:
+- name: bosh_musings_z2
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.11.0/24
+    gateway: 10.244.11.1
+    static:
+    - 10.244.11.2 - 10.244.11.200
+- name: bosh_musings_z3
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.12.0/24
+    gateway: 10.244.12.1
+    static:
+    - 10.244.12.2 - 10.244.12.200
+
+resource_pools:
+- name: default_z2
+  network: bosh_musings_z2
+  stemcell: (( grab resource_pools.default_z1.stemcell ))
+- name: default_z3
+  network: bosh_musings_z3
+  stemcell: (( grab resource_pools.default_z1.stemcell ))
+
+jobs:
+- name: web_z2
+  inject: (( inject meta.jobs.web-template ))
+  resource_pool: default_z2
+- name: web_z3
+  inject: (( inject meta.jobs.web-template ))
+  resource_pool: default_z3

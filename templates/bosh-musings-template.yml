@@ -7,22 +7,19 @@ releases:
 
 networks:
 - name: bosh_musings_z1
-  subnets: (( merge ))
-- name: bosh_musings_z2
-  subnets: (( merge ))
-- name: bosh_musings_z3
-  subnets: (( merge ))
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.10.0/24
+    gateway: 10.244.10.1
+    static:
+    - 10.244.10.2 - 10.244.10.200
 
 resource_pools:
 - name: default_z1
   network: bosh_musings_z1
-  stemcell: (( grab meta.stemcell ))
-- name: default_z2
-  network: bosh_musings_z2
-  stemcell: (( grab meta.stemcell ))
-- name: default_z3
-  network: bosh_musings_z3
-  stemcell: (( grab meta.stemcell ))
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
 
 compilation:
   workers: 2
@@ -35,28 +32,20 @@ update:
   canary_watch_time: 15000-100000
   update_watch_time: 15000-300000
 
+meta:
+  jobs:
+    web-template:
+      instances: (( param "web instances must be specified" ))
+      templates:
+      - {name: web, release: bosh_musings}
+      resource_pool: (( param "web resource pool must be specified" ))
+      networks: (( param "web networks must be specified" ))
+
 jobs:
 - name: web_z1
-  instances: (( merge ))
-  templates:
-  - {name: web, release: bosh_musings}
+  inject: (( inject meta.jobs.web-template ))
+  instances: 1
   resource_pool: default_z1
   networks:
   - name: bosh_musings_z1
-    static_ips: (( merge ))
-- name: web_z2
-  instances: (( merge ))
-  templates:
-  - {name: web, release: bosh_musings}
-  resource_pool: default_z2
-  networks:
-  - name: bosh_musings_z2
-    static_ips: (( merge ))
-- name: web_z3
-  instances: (( merge ))
-  templates:
-  - {name: web, release: bosh_musings}
-  resource_pool: default_z3
-  networks:
-  - name: bosh_musings_z3
-    static_ips: (( merge ))
+    static_ips: (( static_ips(0) ))
