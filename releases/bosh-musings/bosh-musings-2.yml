@@ -1,0 +1,26 @@
+---
+packages:
+- name: go
+  version: 643ffd83586a30edafe8c6f8c4c4b06cb25b21b7
+  fingerprint: 643ffd83586a30edafe8c6f8c4c4b06cb25b21b7
+  sha1: 3f044f77d570bbe9a9e63fe224b34d90f13e8473
+  dependencies: []
+- name: web
+  version: bc88a222099dea1e30c6e3325c3da3664223f821
+  fingerprint: bc88a222099dea1e30c6e3325c3da3664223f821
+  sha1: a5a5401c294f20d4d2d24a19093491428f11530e
+  dependencies:
+  - go
+jobs:
+- name: web
+  version: 7c75f1efeaa47b5e0e56b9578b2bba552c61075b
+  fingerprint: 7c75f1efeaa47b5e0e56b9578b2bba552c61075b
+  sha1: e2ed26a168af5220a57a2297e425e39d876b2ef1
+license:
+  version: 9841d3f4cf3430748ecd6b1c6308345f8bf9404a
+  fingerprint: 9841d3f4cf3430748ecd6b1c6308345f8bf9404a
+  sha1: e3f2d78cf1d2ea85d4423aa4549f70ccd3b472ff
+commit_hash: b7326088
+uncommitted_changes: false
+name: bosh-musings
+version: '2'
