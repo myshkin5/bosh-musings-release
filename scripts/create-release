@@ -4,6 +4,10 @@ set -e
 
 RELEASE_DIR=$(dirname $0)/..
 
+cd $RELEASE_DIR
+
+git rev-parse HEAD > src/bosh-musings/version/version
+
 $RELEASE_DIR/scripts/update-package-specs
 
 # Will fail if the previous command changed a spec (or if the working directory is dirty)

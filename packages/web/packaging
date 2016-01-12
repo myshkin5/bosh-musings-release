@@ -8,4 +8,6 @@ export GOPATH=$PWD
 export GOBIN=${BOSH_INSTALL_TARGET}
 export PATH=$PATH:$GOROOT/bin
 
-go install bosh-musings/web
+export VERSION=$(cat src/bosh-musings/version/version)
+
+go install -ldflags "-X bosh-musings/version.Version=$VERSION" bosh-musings/web

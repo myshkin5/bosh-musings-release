@@ -16,8 +16,10 @@ var _ = Describe("Handler", func() {
 		request, err := http.NewRequest("GET", "/", nil)
 		Expect(err).NotTo(HaveOccurred())
 
+		handler := handler.New("version-string")
+
 		handler.ServeHTTP(recorder, request)
 
-		Expect(recorder.Body.String()).To(Equal("hello, world!\n"))
+		Expect(recorder.Body.String()).To(Equal("hello, world!\nversion = version-string"))
 	})
 })

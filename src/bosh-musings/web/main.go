@@ -3,6 +3,7 @@ package main
 import (
 	"bosh-musings/utils"
 	"bosh-musings/web/handler"
+	"bosh-musings/version"
 
 	"log"
 	"net/http"
@@ -17,7 +18,9 @@ func main() {
 	}
 	defer os.Remove(pidFile)
 
-	http.HandleFunc("/", handler.ServeHTTP)
+	handler := handler.New(version.Version)
+
+	http.Handle("/", handler)
 	err = http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 	if err != nil {
 		log.Fatal("ListenAndServe:", err)

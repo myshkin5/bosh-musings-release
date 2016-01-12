@@ -18,6 +18,7 @@
 /bin
 /pkg
 *.coverprofile
+/src/bosh-musings/version/version
 /src/golang.org/
 /src/github.com/geofffranks/
 /src/github.com/voxelbrain/

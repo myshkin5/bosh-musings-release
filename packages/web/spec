@@ -6,5 +6,7 @@ dependencies:
 
 files:
 - bosh-musings/web/*.go
+- bosh-musings/version/version # bosh create release fails when the file isn't present. Use scripts/create-release to generate
 - bosh-musings/utils/*.go # Auto-generated dependency
+- bosh-musings/version/*.go # Auto-generated dependency
 - bosh-musings/web/handler/*.go # Auto-generated dependency
