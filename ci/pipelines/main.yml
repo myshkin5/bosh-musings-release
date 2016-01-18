@@ -1,0 +1,16 @@
+---
+resources:
+- name: bosh-musings-release
+  type: git
+  source:
+    uri: https://github.com/myshkin5/bosh-musings-release.git
+    branch: master
+
+jobs:
+- name: test
+  serial: true
+  plan:
+  - get: bosh-musings-release
+    trigger: true
+  - task: test
+    file: bosh-musings-release/ci/scripts/test.yml
