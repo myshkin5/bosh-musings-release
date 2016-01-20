@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+RELEASE_DIR=$(dirname $0)/..
+
+DOCKER_PASS=$(lpass show --password docker.com)
+
+set-pipeline() {
+    NAME=$1 ; shift
+    echo "Setting $NAME"
+    fly set-pipeline --pipeline $NAME --config $RELEASE_DIR/ci/pipelines/$NAME.yml \
+        --var docker-password=$DOCKER_PASS $@
+}
+
+set-pipeline main $@
+set-pipeline docker $@

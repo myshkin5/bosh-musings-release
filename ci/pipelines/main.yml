@@ -13,4 +13,10 @@ jobs:
   - get: bosh-musings-release
     trigger: true
   - task: test
-    file: bosh-musings-release/ci/scripts/test.yml
+    config:
+      platform: linux
+      image: docker:///myshkin5/bosh-musings-default
+      inputs:
+      - name: bosh-musings-release
+      run:
+        path: bosh-musings-release/ci/scripts/test.sh

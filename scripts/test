@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
-check_cmd() {
+check-cmd() {
     CMD=$1
     which $CMD > /dev/null
     if [[ $? == 1 ]]; then
-        help_cmd $@
+        help-cmd $@
     fi
     test -x $(which $CMD)
     if [[ $? == 1 ]]; then
-        help_cmd $@
+        help-cmd $@
     fi
 }
 
-help_cmd() {
+help-cmd() {
     echo "$1 not found"
     shift
     echo "Execute the following to install: $*"
     exit 1
 }
 
-check_cmd goimports "go get golang.org/x/tools/cmd/goimports"
-check_cmd ginkgo    "go get github.com/onsi/ginkgo/ginkgo"
+check-cmd goimports "go get golang.org/x/tools/cmd/goimports"
+check-cmd ginkgo    "go get github.com/onsi/ginkgo/ginkgo"
 
 set -e
 

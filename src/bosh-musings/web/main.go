@@ -2,8 +2,8 @@ package main
 
 import (
 	"bosh-musings/utils"
-	"bosh-musings/web/handler"
 	"bosh-musings/version"
+	"bosh-musings/web/handler"
 
 	"log"
 	"net/http"
