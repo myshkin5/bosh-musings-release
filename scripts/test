@@ -24,15 +24,21 @@ check-cmd ginkgo    "go get github.com/onsi/ginkgo/ginkgo"
 
 set -e
 
+error-trap() {
+    echo -e "\033[1m\033[41m Failed!                                                                        \033[0m"
+}
+
+trap 'error-trap' ERR
+
 cd $(dirname $0)/../src/bosh-musings
 
 goimports -w .
 
-echo -e "\033[1m\033[42mUnit tests...                                                                   \033[0m"
-ginkgo -r --skipPackage integration_tests --keepGoing --randomizeAllSpecs --randomizeSuites --failOnPending --cover --trace --race --progress $@
+echo -e "\033[1m\033[42m Unit tests...                                                                  \033[0m"
+ginkgo -r --skipPackage endtoend_tests --keepGoing --randomizeAllSpecs --randomizeSuites --failOnPending --cover --trace --race --progress $@
 
-echo -e "\033[1m\033[42mIntegration tests...                                                            \033[0m"
-cd integration_tests
+echo -e "\033[1m\033[42m End-to-end tests...                                                            \033[0m"
+cd endtoend_tests
 ginkgo -r --keepGoing --randomizeAllSpecs --randomizeSuites --failOnPending --cover --trace --race --progress $@
 
-echo -e "\033[1m\033[42mCompleted successfully.                                                         \033[0m"
+echo -e "\033[1m\033[42m Completed successfully.                                                        \033[0m"
